@@ -89,7 +89,7 @@ locals {
 }
 
 module "dcos-infrastructure" {
-  source  = "dcos-terraform/infrastructure/aws"
+  source  = "github.com/dcos-terraform/terraform-aws-infrastructure?ref=new-lb"
   version = "~> 0.1.0"
 
   admin_ips                                  = "${var.admin_ips}"
@@ -232,7 +232,7 @@ module "dcos-install" {
   dcos_log_directory                           = "${var.dcos_log_directory}"
   dcos_master_discovery                        = "${var.dcos_master_discovery}"
   dcos_master_dns_bindall                      = "${var.dcos_master_dns_bindall}"
-  dcos_master_external_loadbalancer            = "${coalesce(var.dcos_master_external_loadbalancer,module.dcos-infrastructure.elb.masters_dns_name)}"
+  dcos_master_external_loadbalancer            = "${coalesce(var.dcos_master_external_loadbalancer,module.dcos-infrastructure.lb.masters_dns_name)}"
   dcos_master_list                             = "${var.dcos_master_list}"
   dcos_mesos_container_log_sink                = "${var.dcos_mesos_container_log_sink}"
   dcos_mesos_dns_set_truncate_bit              = "${var.dcos_mesos_dns_set_truncate_bit}"
